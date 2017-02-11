@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_blog_single"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="info.androidhive.firebase.BlogSingleActivity">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@mipmap/add_btn"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:id="@+id/simpleBlogImage" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/simpleBlogTitle"
+                    android:text="Question will displayed here!!"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:text="UserName"
+                    android:ems="10"
+                    android:textSize="16dp"
+                    android:padding="10dp"
+                    android:id="@+id/simpleBlogUsername"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textStyle="normal|italic"
+                    android:textAlignment="textEnd" />
+
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/simpleBlogDesc"
+                android:text="Description will displayed here!!"
+                android:padding="10dp"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+    <Button
+        android:text="Remove Post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:layout_alignParentStart="true"
+        android:id="@+id/simpleRemovePost" />
+
+
+
+</RelativeLayout>
