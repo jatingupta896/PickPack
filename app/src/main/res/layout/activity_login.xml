@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,7 +29,7 @@
             android:layout_marginBottom="30dp"
             android:src="@mipmap/photoboothicon"
             android:id="@+id/imageView"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_weight="0.23" />
 
         <android.support.design.widget.TextInputLayout
@@ -81,10 +80,6 @@
             android:layout_marginTop="20dip">
         </com.google.android.gms.common.SignInButton>
 
-
-
-
-
         <Button
             android:id="@+id/btn_reset_password"
             android:layout_width="fill_parent"
@@ -107,7 +102,7 @@
             android:text="@string/btn_link_to_register"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -210,7 +210,7 @@ public class Web extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public static class BlogViewHolder extends RecyclerView.ViewHolder {
+    private static class BlogViewHolder extends RecyclerView.ViewHolder {
         View mView;
         ImageButton likeButton, dislikeButton;
         DatabaseReference mDatabaseLike, mDatabaseDislike;
@@ -228,7 +228,7 @@ public class Web extends AppCompatActivity {
             mDatabaseDislike.keepSynced(true);
         }
 
-        public void setLikeButton(final String post_key) {
+        private void setLikeButton(final String post_key) {
             mDatabaseLike.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -246,7 +246,7 @@ public class Web extends AppCompatActivity {
             });
         }
 
-        public void setDislikeButton(final String post_key) {
+        private void setDislikeButton(final String post_key) {
             mDatabaseDislike.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -264,13 +264,13 @@ public class Web extends AppCompatActivity {
             });
         }
 
-        public void setTitle(String title) {
+        private void setTitle(String title) {
             TextView post_title = (TextView) mView.findViewById(R.id.post_title);
             post_title.setText(title);
 
         }
 
-        public void setTime(long time) {
+        private void setTime(long time) {
             TextView post_title = (TextView) mView.findViewById(R.id.post_time);
 
 //            Calendar calendar = Calendar.getInstance();
@@ -279,23 +279,23 @@ public class Web extends AppCompatActivity {
             post_title.setText(convertTime(time));
         }
 
-        public String convertTime(long time) {
+        private String convertTime(long time) {
             Date date = new Date(time);
-            Format format = new SimpleDateFormat("HH:mm:ss dd MM yyyy");
+            Format format = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
             return format.format(date);
         }
 
-        public void setDesc(String desc) {
+        private void setDesc(String desc) {
             TextView post_desc = (TextView) mView.findViewById(R.id.post_desc);
             post_desc.setText(desc);
         }
 
-        public void setUsername(String username) {
+        private void setUsername(String username) {
             TextView post_desc = (TextView) mView.findViewById(R.id.post_username);
             post_desc.setText(username);
         }
 
-        public void setImage(final Context ctx, final String Image) {
+        private void setImage(final Context ctx, final String Image) {
             final ImageView post_image = (ImageView) mView.findViewById(R.id.postImage);
 //            Picasso.with(ctx).load(Image).into(post_image);
             Picasso.with(ctx).load(Image).networkPolicy(NetworkPolicy.OFFLINE).into(post_image, new Callback() {
