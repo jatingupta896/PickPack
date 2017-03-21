@@ -124,7 +124,7 @@ public class PostDataActivity extends AppCompatActivity implements View.OnClickL
         //if there is a file to upload
         if (filePath != null) {
             //displaying a progress dialog while upload is going on
-            final ProgressDialog progressDialog = new ProgressDialog(this);
+            final ProgressDialog progressDialog = new ProgressDialog(PostDataActivity.this);
             progressDialog.setTitle("Uploading");
             final String title_val = title.getText().toString().trim();
             final String desc_val = description.getText().toString().trim();
@@ -138,14 +138,14 @@ public class PostDataActivity extends AppCompatActivity implements View.OnClickL
                             //if the upload is successfull
                             //hiding the progress dialog
                             final DatabaseReference newPost = databaseReference.push();
-
+                            final Uri downloadUri = taskSnapshot.getDownloadUrl();
 
                             databaseUser.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     newPost.child("title").setValue(title_val);
                                     newPost.child("desc").setValue(desc_val);
-                                    newPost.child("image").setValue(filePath.toString());
+                                    newPost.child("image").setValue(downloadUri.toString());
                                     newPost.child("uid").setValue(currentUser.getUid());
                                   /*  Map<String, String> time=ServerValue.TIMESTAMP;
                                     long time1=Long.parseLong(time);
