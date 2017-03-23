@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -122,31 +123,33 @@ public class PostDataActivity extends AppCompatActivity implements View.OnClickL
 
     private void uploadFile() {
         //if there is a file to upload
+
         if (filePath != null) {
             //displaying a progress dialog while upload is going on
-            final ProgressDialog progressDialog = new ProgressDialog(PostDataActivity.this);
+            final ProgressDialog progressDialog = new ProgressDialog(PostDataActivity.this, R.style.MyTheme);
             progressDialog.setTitle("Uploading");
             final String title_val = title.getText().toString().trim();
             final String desc_val = description.getText().toString().trim();
-            progressDialog.show();
 
-            StorageReference riversRef = storageReference.child("Blog_Image").child(filePath.getLastPathSegment());
-            riversRef.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //if the upload is successfull
-                            //hiding the progress dialog
-                            final DatabaseReference newPost = databaseReference.push();
-                            final Uri downloadUri = taskSnapshot.getDownloadUrl();
+            if (!TextUtils.isEmpty(title_val) && !TextUtils.isEmpty(desc_val)) {
+                progressDialog.show();
+                StorageReference riversRef = storageReference.child("Blog_Image").child(filePath.getLastPathSegment());
+                riversRef.putFile(filePath)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                //if the upload is successfull
+                                //hiding the progress dialog
+                                final DatabaseReference newPost = databaseReference.push();
+                                final Uri downloadUri = taskSnapshot.getDownloadUrl();
 
-                            databaseUser.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    newPost.child("title").setValue(title_val);
-                                    newPost.child("desc").setValue(desc_val);
-                                    newPost.child("image").setValue(downloadUri.toString());
-                                    newPost.child("uid").setValue(currentUser.getUid());
+                                databaseUser.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        newPost.child("title").setValue(title_val);
+                                        newPost.child("desc").setValue(desc_val);
+                                        newPost.child("image").setValue(downloadUri.toString());
+                                        newPost.child("uid").setValue(currentUser.getUid());
                                   /*  Map<String, String> time=ServerValue.TIMESTAMP;
                                     long time1=Long.parseLong(time);
                                     time1=time1*1000L;
@@ -156,60 +159,59 @@ public class PostDataActivity extends AppCompatActivity implements View.OnClickL
                                    // DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                                      // this will create a new unique key
                                    // value = new HashMap<>();*/
-                                    //Calendar calendar=Calendar.getInstance();
-                                    //SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy, HH:mm", Locale.ENGLISH);
-                                    //String date=sdf.format(calendar.getTime());
+                                        //Calendar calendar=Calendar.getInstance();
+                                        //SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy, HH:mm", Locale.ENGLISH);
+                                        //String date=sdf.format(calendar.getTime());
 
-                                    newPost.child("time").setValue(System.currentTimeMillis());
-                                    newPost.child("username").setValue(dataSnapshot.child("name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                startActivity(new Intent(PostDataActivity.this, Web.class));
-                                            }
-                                        }
-                                    });
-                                }
+                                        newPost.child("time").setValue(System.currentTimeMillis());
+                                    }
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
 
-                                }
-                            });
-                            progressDialog.dismiss();
+                                    }
+                                });
+                                progressDialog.dismiss();
 
-                            //and displaying a success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                                //and displaying a success toast
+                                Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(PostDataActivity.this, Web.class));
+                                finish();
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            //if the upload is not successfull
-                            //hiding the progress dialog
-                            progressDialog.dismiss();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                //if the upload is not successfull
+                                //hiding the progress dialog
+                                progressDialog.dismiss();
 
-                            //and displaying error message
-                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            //calculating progress percentage
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                                //and displaying error message
+                                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                //calculating progress percentage
+                                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
-                            //displaying percentage in progress dialog
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                        }
-                    });
+                                //displaying percentage in progress dialog
+                                progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                            }
+                        });
+            } else {
+                Toast.makeText(getApplicationContext(), "Title and Description are empty..Please Fill It", Toast.LENGTH_LONG).show();
+            }
         }
         //if there is not any file
         else {
             //you can display an error toast
             Toast.makeText(getApplicationContext(), "Choose a Photo", Toast.LENGTH_LONG).show();
         }
+
+
     }
 
 

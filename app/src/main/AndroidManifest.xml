@@ -58,9 +58,7 @@
             android:label="@string/title_activity_reset_password"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Web" />
-        <activity android:name=".GoogleUserAcivity" />
         <activity android:name=".BlogSingleActivity" />
-        <activity android:name=".MyTimeline"></activity>
     </application>
 
 </manifest>

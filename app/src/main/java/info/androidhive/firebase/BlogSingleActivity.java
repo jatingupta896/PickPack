@@ -31,7 +31,6 @@ public class BlogSingleActivity extends AppCompatActivity {
         blogSimpleDesc = (TextView) findViewById(R.id.simpleBlogDesc);
         blogSimpleTitle = (TextView) findViewById(R.id.simpleBlogTitle);
         blogSimpleImage = (ImageView) findViewById(R.id.simpleBlogImage);
-        blogSimpleUsername = (TextView) findViewById(R.id.simpleBlogUsername);
         simpleRemovePost = (Button) findViewById(R.id.simpleRemovePost);
         final String post_key = getIntent().getExtras().getString("blog_id");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Blog");
@@ -43,12 +42,10 @@ public class BlogSingleActivity extends AppCompatActivity {
                 String post_title = (String) dataSnapshot.child("title").getValue();
                 String post_desc = (String) dataSnapshot.child("desc").getValue();
                 String post_image = (String) dataSnapshot.child("image").getValue();
-                String post_username = (String) dataSnapshot.child("username").getValue();
                 String post_uid = (String) dataSnapshot.child("uid").getValue();
 
                 blogSimpleTitle.setText(post_title);
                 blogSimpleDesc.setText(post_desc);
-                blogSimpleUsername.setText(post_username);
                 Picasso.with(BlogSingleActivity.this).load(post_image).into(blogSimpleImage);
                 //Toast.makeText(BlogSingleActivity.this,auth.getCurrentUser().getUid(),Toast.LENGTH_SHORT).show();
                 if (auth.getCurrentUser().getUid().equals(post_uid)) {

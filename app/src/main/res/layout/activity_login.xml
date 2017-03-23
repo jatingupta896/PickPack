@@ -5,13 +5,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="info.androidhive.firebase.LoginActivity">
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,13 +17,13 @@
 
 
         <ImageView
-            android:layout_width="90dp"
+            android:layout_width="139dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
             android:src="@mipmap/photoboothicon"
             android:id="@+id/imageView"
             android:layout_height="0dp"
-            android:layout_weight="0.23" />
+            android:layout_weight="0.30" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -72,13 +65,6 @@
             android:background="@color/colorAccent"
             android:text="@string/btn_login"
             android:textColor="@android:color/black" />
-
-        <com.google.android.gms.common.SignInButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/googlebtn"
-            android:layout_marginTop="20dip">
-        </com.google.android.gms.common.SignInButton>
 
         <Button
             android:id="@+id/btn_reset_password"

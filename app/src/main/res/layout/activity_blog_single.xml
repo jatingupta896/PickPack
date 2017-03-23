@@ -31,26 +31,13 @@
                 android:layout_height="match_parent" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/simpleBlogTitle"
                     android:text="Question will displayed here!!"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:padding="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:text="UserName"
-                    android:ems="10"
-                    android:textSize="16dp"
-                    android:padding="10dp"
-                    android:id="@+id/simpleBlogUsername"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textStyle="normal|italic"
-                    android:textAlignment="textEnd" />
 
             </TableRow>
 

@@ -7,7 +7,6 @@ package info.androidhive.firebase;
 public class Blog {
     private String title, Desc;
     private String Image;
-    private String username;
     private long time;
 
     public long getTime() {
@@ -33,11 +32,10 @@ public class Blog {
 
     }
 
-    public Blog(String title, String Desc, String Image, String username, long time, String uid) {
+    public Blog(String title, String Desc, String Image, long time, String uid) {
         this.title = title;
         this.Desc = Desc;
         this.Image = Image;
-        this.username = username;
         this.time = time;
         this.uid = uid;
     }
@@ -67,12 +65,5 @@ public class Blog {
         this.Desc = Desc;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
 }

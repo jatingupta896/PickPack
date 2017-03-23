@@ -37,8 +37,6 @@ public class Web extends AppCompatActivity {
     private RecyclerView mBlogList;
     private boolean mProcessLike = false;
     private boolean mProcessDislike = false;
-    private int likesCount = 0;
-    private String lc;
 
 
     @Override
@@ -79,12 +77,10 @@ public class Web extends AppCompatActivity {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
-                viewHolder.setUsername(model.getUsername());
                 viewHolder.setTime(model.getTime());
                 viewHolder.setLikeButton(post_key);
                 viewHolder.setDislikeButton(post_key);
-                //viewHolder.setLikesCount(post_key);
-               /* viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         //Toast.makeText(Web.this,post_key,Toast.LENGTH_SHORT).show();
@@ -92,7 +88,7 @@ public class Web extends AppCompatActivity {
                         simpleBlogIntent.putExtra("blog_id",post_key);
                         startActivity(simpleBlogIntent);
                     }
-                });*/
+                });
                 viewHolder.likeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -105,20 +101,10 @@ public class Web extends AppCompatActivity {
                                     if (dataSnapshot.child(post_key).hasChild(auth.getCurrentUser().getUid())) {
                                         mDatabaseLike.child(post_key).child(auth.getCurrentUser().getUid()).removeValue();
                                         mProcessLike = false;
-                                        likesCount = (int) dataSnapshot.getChildrenCount();
-                                        //likesCount=likesCount-1;
-                                        lc = likesCount + "";
-                                        TextView post_title = (TextView) findViewById(R.id.likes_count);
-                                        post_title.setText(lc);
-
                                     } else {
 
                                         mDatabaseLike.child(post_key).child(auth.getCurrentUser().getUid()).setValue("RandomValue");
                                         mProcessLike = false;
-                                        likesCount = (int) dataSnapshot.getChildrenCount();
-                                        lc = likesCount + "";
-                                        TextView post_title = (TextView) findViewById(R.id.likes_count);
-                                        post_title.setText(lc);
 
                                     }
                                 }
@@ -187,10 +173,6 @@ public class Web extends AppCompatActivity {
 
             case R.id.item1:
                 startActivity(new Intent(Web.this, MainActivity.class));
-                this.finish();
-                break;
-            case R.id.item2:
-                startActivity(new Intent(Web.this, MyTimeline.class));
                 this.finish();
                 break;
             case R.id.item3:
@@ -290,10 +272,6 @@ public class Web extends AppCompatActivity {
             post_desc.setText(desc);
         }
 
-        public void setUsername(String username) {
-            TextView post_desc = (TextView) mView.findViewById(R.id.post_username);
-            post_desc.setText(username);
-        }
 
         public void setImage(final Context ctx, final String Image) {
             final ImageView post_image = (ImageView) mView.findViewById(R.id.postImage);

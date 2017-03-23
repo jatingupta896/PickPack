@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset;
     private SignInButton mGoogleBtn;
     private static final int RC_SIGN_IN = 1;
@@ -47,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this, R.style.MyTheme);
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
@@ -75,11 +74,10 @@ public class LoginActivity extends AppCompatActivity {
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnSignup = (Button) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnReset = (Button) findViewById(R.id.btn_reset_password);
-        mGoogleBtn = (SignInButton) findViewById(R.id.googlebtn);
+       // mGoogleBtn = (SignInButton) findViewById(R.id.googlebtn);
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -96,12 +94,12 @@ public class LoginActivity extends AppCompatActivity {
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-        mGoogleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
+//        mGoogleBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                signIn();
+//            }
+//        });
 
 
         auth = FirebaseAuth.getInstance();
@@ -136,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                progressBar.setVisibility(View.VISIBLE);
+
                 progressDialog.setMessage("Login......");
                 progressDialog.show();
 
@@ -148,7 +146,6 @@ public class LoginActivity extends AppCompatActivity {
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
-                                progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
                                     // there was an error
                                     if (password.length() < 6) {
@@ -178,14 +175,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signIn() {
-        progressBar.setVisibility(View.VISIBLE);
         progressDialog.setMessage("Login......");
         progressDialog.show();
 
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
         progressDialog.dismiss();
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -215,7 +210,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                        startActivity(new Intent(LoginActivity.this, GoogleUserAcivity.class));
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
