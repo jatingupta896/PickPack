@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PhotoMatic</string>
+    <string name="app_name">PickPack</string>
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
     <string name="name">Name</string>
