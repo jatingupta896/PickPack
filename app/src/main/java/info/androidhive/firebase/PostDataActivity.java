@@ -15,10 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -144,7 +142,7 @@ public class PostDataActivity extends AppCompatActivity implements View.OnClickL
                                 final Uri downloadUri = taskSnapshot.getDownloadUrl();
 
                                 databaseUser.addValueEventListener(new ValueEventListener() {
-                                    @Override
+                                           @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         newPost.child("title").setValue(title_val);
                                         newPost.child("desc").setValue(desc_val);
