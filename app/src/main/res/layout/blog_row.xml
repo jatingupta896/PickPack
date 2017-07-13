@@ -9,13 +9,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/linearLayout">
+
     <ImageView
+        android:id="@+id/postImage"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@mipmap/add_btn"
-        android:scaleType="fitCenter"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:id="@+id/postImage" />
+        android:scaleType="fitXY"
+        android:src="@mipmap/add_btn" />
 
     <TableRow
         android:layout_width="match_parent"

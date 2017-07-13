@@ -65,7 +65,7 @@
         android:id="@+id/imageSelect"
         android:background="#00ffffff"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         android:clickable="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

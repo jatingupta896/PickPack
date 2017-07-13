@@ -3,6 +3,7 @@ package info.androidhive.firebase;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,6 +36,9 @@ public class BlogSingleActivity extends AppCompatActivity {
         final String post_key = getIntent().getExtras().getString("blog_id");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Blog");
         auth = FirebaseAuth.getInstance();
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         //Toast.makeText(BlogSingleActivity.this,post_key,Toast.LENGTH_SHORT).show();
         databaseReference.child(post_key).addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,5 +73,24 @@ public class BlogSingleActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //Write your logic here
+                startActivity(new Intent(this, Web.class));
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, Web.class));
     }
 }

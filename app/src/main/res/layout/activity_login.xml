@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,13 +18,13 @@
 
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="139dp"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
-            android:src="@mipmap/photoboothicon"
-            android:id="@+id/imageView"
-            android:layout_height="0dp"
-            android:layout_weight="0.30" />
+            android:layout_weight="0.30"
+            android:src="@mipmap/photoboothicon" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -74,13 +75,13 @@
         <Button
             android:id="@+id/btn_reset_password"
             android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:background="@null"
             android:text="@string/btn_forgot_password"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
-            android:textSize="14sp"
-            android:layout_height="wrap_content" />
+            android:textSize="14sp" />
 
         <!-- Link to Login Screen -->
 

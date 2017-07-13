@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,6 +79,9 @@ public class PostDataActivity extends AppCompatActivity implements View.OnClickL
         //attaching listener
         buttonChoose.setOnClickListener(this);
         submitButton.setOnClickListener(this);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     //method to show file chooser
@@ -142,7 +146,7 @@ public class PostDataActivity extends AppCompatActivity implements View.OnClickL
                                 final Uri downloadUri = taskSnapshot.getDownloadUrl();
 
                                 databaseUser.addValueEventListener(new ValueEventListener() {
-                                           @Override
+                                    @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         newPost.child("title").setValue(title_val);
                                         newPost.child("desc").setValue(desc_val);
@@ -212,5 +216,22 @@ public class PostDataActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //Write your logic here
+                startActivity(new Intent(this, Web.class));
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, Web.class));
+    }
 }
